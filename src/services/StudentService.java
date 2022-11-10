@@ -15,6 +15,39 @@ public class StudentService {
         db = new Database();
     }
 
+    public StudentModel findByPRN(String prnNumber) {
+        String query = """
+                SELECT Student.id, Student.name, email,\s
+                phone_number, prn_number,\s
+                Department.name as department
+                FROM Student INNER JOIN Department\s
+                ON Student.department = Department.id
+                WHERE Student.prn_number = '""" + prnNumber + "';";
+
+        try {
+            ResultSet result = db.statement.executeQuery(query);
+
+            StudentModel model = null;
+
+            while(result.next()) {
+                int id = result.getInt(1);
+                String name = result.getString(2);
+                String email = result.getString(3);
+                long phone_number = result.getLong(4);
+                String prn_number = result.getString(5);
+                String department = result.getString(6);
+
+                model = new StudentModel(id,name,email,department,prn_number,phone_number);
+            }
+
+            return model;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public ArrayList<StudentModel> findAllIsNotPlaced() {
         String query = """
                 SELECT Student.id, Student.name, email,\s
@@ -75,6 +108,21 @@ public class StudentService {
                 DELETE FROM Student
                 WHERE id = \s
                 """ + _id;
+
+        try {
+            db.statement.executeUpdate(query);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateStudentSetIsPlaced(int _id,boolean _isPlaced) {
+        String query = "UPDATE Student "+
+                "SET isPlaced=" + _isPlaced +
+                " WHERE id=" + _id + ";";
+
 
         try {
             db.statement.executeUpdate(query);

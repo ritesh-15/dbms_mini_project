@@ -78,6 +78,30 @@ public class CompanyService {
         }
     }
 
+    public CompanyModel findByName(String _name) {
+        String query = "SELECT id, name, intake FROM Company WHERE name='"+ _name  +"';";
+
+        try {
+            ResultSet result = db.statement.executeQuery(query);
+
+            CompanyModel model = null;
+
+            while(result.next()) {
+                int id = result.getInt(1);
+                String name = result.getString(2);
+                int intake = result.getInt(3);
+                model = new CompanyModel(id, name, intake);
+                break;
+            }
+
+            return model;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public ArrayList<CompanyModel> findAll() {
         try {
             ResultSet result = db.statement.executeQuery("SELECT id, name, intake FROM Company;");
