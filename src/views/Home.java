@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class Home extends JFrame implements ActionListener {
 
-    public Home() {
+    public  Home() {
         getContentPane().setBackground(Color.WHITE);
 
         setSize(1100,700);
@@ -29,10 +29,16 @@ public class Home extends JFrame implements ActionListener {
         });
 
         // placements btn
-        textButton("Placements", 600,200,250,50, null);
+        textButton("Placements", 600,200,250,50, e -> {
+            setVisible(false);
+            new Placements();
+        });
 
         // companies btn
-        textButton("Companies",300,300,250,50,null);
+        textButton("Companies",300,300,250,50,e -> {
+            setVisible(false);
+            new Companies();
+        });
 
 
         // departments btn

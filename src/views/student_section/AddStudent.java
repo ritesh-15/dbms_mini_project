@@ -48,7 +48,7 @@ public class AddStudent extends JFrame {
         JTextField nameTf = new JTextField();
         nameTf.setBounds(320,200,450,50);
         add(nameTf);
-
+                    
         // Email address
         JLabel emailLabel  = new JLabel("Student Email address");
         emailLabel.setBounds(100, 300, 200,50);
@@ -85,7 +85,6 @@ public class AddStudent extends JFrame {
 
         DefaultComboBoxModel list = new DefaultComboBoxModel();
         for(DepartmentModel e: result) {
-            System.out.println(e.name);
             list.addElement(e.name);
         }
 
