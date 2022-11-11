@@ -1,14 +1,12 @@
 package views.placement_section;
 
 import models.CompanyModel;
-import models.DepartmentModel;
 import models.StudentModel;
 import services.CompanyService;
 import services.PlacementService;
 import services.StudentService;
 import views.Departments;
 import views.Placements;
-import views.Students;
 
 import javax.swing.*;
 import java.awt.*;

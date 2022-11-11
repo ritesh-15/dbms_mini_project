@@ -133,6 +133,19 @@ public class StudentService {
         }
     }
 
+    public void updateStudentSetIsPlaced(String prnNumber, boolean _isPlaced) {
+        String query = "UPDATE Student "+
+                "SET isPlaced=" + _isPlaced +
+                " WHERE prn_number='" + prnNumber + "';";
+
+
+        try {
+            db.statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean updateStudent(int _id,String name, String email, int department, long phone_number, String prn_number) {
         String query = "UPDATE Student "+
                 "SET name=" + "'" + name + "'," +
